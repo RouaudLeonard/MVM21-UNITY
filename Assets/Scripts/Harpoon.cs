@@ -108,7 +108,7 @@ public class Harpoon : MonoBehaviour
        // pm.freeze = true;
 
         RaycastHit hit;
-        if (Physics.Raycast(cm.position, tonguePoint.forward, out hit, maxGrappleDistance, whatIsHarpoonable))
+        if (Physics.Raycast(cm.position, tonguePoint.forward, out hit, maxHarpoonDistance, whatIsHarpoonable))
         {
 
             //Hit something to store the hit point
@@ -135,7 +135,7 @@ public class Harpoon : MonoBehaviour
         } //camera position and  .forward
         else
         {
-            grapplePoint = tonguePoint.position + tonguePoint.forward * maxGrappleDistance;
+            grapplePoint = tonguePoint.position + tonguePoint.forward * maxHarpoonDistance;
 
             Invoke(nameof(StopGrapple), grappleDelayTime);  //not needed
         }
