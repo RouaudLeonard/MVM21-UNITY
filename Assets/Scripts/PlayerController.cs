@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float rotationSpeed = 360f;
-    private Vector3 inputVector;
-
+    private Vector2 inputVector;
+    IsometricCharacterRenderer isoRenderer;
     float horizontalInput;
     float verticalInput;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
     void FixedUpdate()
-    {
-        Move();
-    }
-    void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        PlayerInput();
-        Look();
-    }
+        inputVector = new(horizontalInput, verticalInput);
 
-    void PlayerInput()
+        inputVector = Vector2.ClampMagnitude(inputVector, 1);
+
+        Move();
+       // isoRenderer.SetDirection(inputVector);
+    }
+    void Update()
     {
-        inputVector = new(horizontalInput, 0, verticalInput);
+
+        Look();
     }
     /// <summary>
     /// Instead of strafing, turn in the direction the player is looking at.
@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
     void Look()
     {
         //So it doesn't turn back around when there is no input.
-        if (inputVector == Vector3.zero)
+        if (inputVector == Vector2.zero)
 
         {
             return;
         }
 
-        var rotation = Quaternion.LookRotation(inputVector.ToIso(), Vector3.up);
+        var rotation = Quaternion.LookRotation(inputVector.ToIso(), Vector2.up);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
     }
