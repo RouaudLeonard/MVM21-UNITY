@@ -30,7 +30,12 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        float velocity = 6;
 
+        //velocity  = distance/time
+        //rb.AddForce(Vector2.down,ForceMode2D.Impulse);
+
+        float momentum = rb.mass * velocity;
         Look();
     }
     /// <summary>

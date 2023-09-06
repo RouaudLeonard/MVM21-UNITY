@@ -46,7 +46,7 @@ public class Harpoon : MonoBehaviour
     //[Header("Input")]//Won't need the input this way because of new input System
     //public KeyCode grappleKey = KeyCode.Mouse1;
 
-    private bool grappling;
+    private bool harpooning;
 
 
 
@@ -77,7 +77,7 @@ public class Harpoon : MonoBehaviour
             grapplingCdTimer -= Time.deltaTime;
         }
 
-        if (grappling == true)
+        if (harpooning == true)
         {
 
 
@@ -89,89 +89,89 @@ public class Harpoon : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (grappling)
-            lr.SetPosition(0, mouthTip.position);
+        //if (grappling)
+        //    lr.SetPosition(0, mouthTip.position);
 
     }
 
 
 
-    private void StartGrapple()
+    private void StartHarpooning()
     {
 
-        if (grapplingCdTimer > 0) return;
+        //if (grapplingCdTimer > 0) return;
+
+
+        //grappling = true;
+        //// pm.freeze = true;
+
+        //if (Physics.Raycast(cm.position, tonguePoint.forward, out RaycastHit hit, maxHarpoonDistance, whatIsHarpoonable))
+        //{
+
+        //    //Hit something to store the hit point
+        //    grapplePoint = hit.point;
+
+        //    //call Execute Grapple with a delay
+        //    Invoke(nameof(ExcuteGrapple), grappleDelayTime);
 
 
 
 
-        grappling = true;
-       // pm.freeze = true;
+        //    if (hit.transform.gameObject.layer == whatIsHarpoonable)
+        //    {
 
-        RaycastHit hit;
-        if (Physics.Raycast(cm.position, tonguePoint.forward, out hit, maxHarpoonDistance, whatIsHarpoonable))
-        {
+        //        ExcuteGrapple();
+        //        grappling = true;
 
-            //Hit something to store the hit point
-            grapplePoint = hit.point;
-
-            //call Execute Grapple with a delay
-            Invoke(nameof(ExcuteGrapple), grappleDelayTime);
+        //        //this is the toggle for invoke it
+        //        Debug.Log("Hit grapple thing");
+        //    }
 
 
 
+        //} //camera position and  .forward
+        //else
+        //{
+        //    grapplePoint = tonguePoint.position + tonguePoint.forward * maxHarpoonDistance;
 
-            if (hit.transform.gameObject.layer == whatIsHarpoonable)
-            {
-
-                ExcuteGrapple();
-                grappling = true;
-
-                //this is the toggle for invoke it
-                Debug.Log("Hit grapple thing");
-            }
-
-
-
-        } //camera position and  .forward
-        else
-        {
-            grapplePoint = tonguePoint.position + tonguePoint.forward * maxHarpoonDistance;
-
-            Invoke(nameof(StopGrapple), grappleDelayTime);  //not needed
-        }
-        lr.enabled = true;
-        lr.SetPosition(1, grapplePoint);
+        //    Invoke(nameof(StopGrapple), grappleDelayTime);  //not needed
+        //}
+        //lr.enabled = true;
+        //lr.SetPosition(1, grapplePoint);
     }
 
-    private void ExcuteGrapple()
+    private void ExecuteHarpoon()
     {
 
     }
-    public bool IsGrappling()
+    public bool IsHarpooning()
     {
-        return grappling;
+        return harpooning;
     }
 
-    public Vector3 GetGrapplePoint()
+    public Vector3 GetLaunchPoint()
     {
         return grapplePoint;
     }
-    public void StopGrapple()
+    public void StopHarpoon()
     {
 //        pm.freeze = false;
 
-        grappling = false;
+        //grappling = false;
 
-        grapplingCdTimer = grapplingCd;
+        //grapplingCdTimer = grapplingCd;
 
-        lr.enabled = false;
+        //lr.enabled = false;
     }
 
 
+    /// <summary>
+    /// For new input system sake
+    /// </summary>
     void OnGrapple()
     {
         Debug.Log("I'm grappling thing");
-        StartGrapple();
+        StartHarpooning();
 
     }
 }
