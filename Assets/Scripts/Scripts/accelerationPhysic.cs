@@ -7,6 +7,7 @@ public class AccelerationPhysic : MonoBehaviour
     public float moveAcceleration = 4;
     public float reverseAcceleration = 4;
     public float moveSpeedCap = 5;
+    public float affectedByHook = 1;
 
     public bool isPlayer = false;
 

@@ -87,23 +87,11 @@ public class Hook : MonoBehaviour
 
         float boatDistance = Vector2.Distance(hookedTo.transform.position, transform.position);
         if (boatDistance > ropeLength) {
+            AccelerationPhysic accelerationPhysic_hookedTo = hookedTo.GetComponent<AccelerationPhysic>();
             Vector2 ropeDir = (hookedTo.transform.position - transform.position).normalized;
-            accelerationPhysic.AddToMoveVec(GetPullVec(ropeDir, boatDistance));
-            hookedTo.GetComponent<AccelerationPhysic>().AddToMoveVec(- GetPullVec(ropeDir, boatDistance));
+            accelerationPhysic.AddToMoveVec(GetPullVec(ropeDir, boatDistance) * accelerationPhysic.affectedByHook);
+            accelerationPhysic_hookedTo.AddToMoveVec(- GetPullVec(ropeDir, boatDistance) * accelerationPhysic_hookedTo.affectedByHook);
         }
-    }
-
-    Vector2 GetPullVec(Vector2 ropeDir, float boatDistance)
-    {
-        return ropeDir * pullForce * Time.deltaTime * (boatDistance - ropeLength);
-    }
-
-    Vector2 GetAimDir()
-    {
-        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 aimDir = (mousePos - playerPos).normalized;
-        return aimDir;
     }
 
     void LaunchUpdate()
@@ -134,5 +122,18 @@ public class Hook : MonoBehaviour
                 return;
             }
         }
+    }
+
+    Vector2 GetPullVec(Vector2 ropeDir, float boatDistance)
+    {
+        return ropeDir * pullForce * Time.deltaTime * (boatDistance - ropeLength);
+    }
+
+    Vector2 GetAimDir()
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 aimDir = (mousePos - playerPos).normalized;
+        return aimDir;
     }
 }
