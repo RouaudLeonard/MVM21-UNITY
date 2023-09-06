@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody2D))]
 public class Harpoon : MonoBehaviour
 {
+ 
     
     [Header("References")]
    // private PlayerMovement pm;  Whatever the player movement script is
-    public Transform cm; // camera variable
+    public Transform camPos; // camera variable
     public Transform tonguePoint; //where the player is looking
     public Transform mouthTip; // point where the raycast is launched
     public LayerMask whatIsHarpoonable;
     public LineRenderer lr;
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     //public Transform debugTransform;
 
     // Vector3 mouseWorldPosition = Vector3.zero;
@@ -41,7 +42,7 @@ public class Harpoon : MonoBehaviour
 
     [Header("Cooldown")]
     public float grapplingCd;
-    private float grapplingCdTimer;
+    private float harpoonCdTimer;
 
     //[Header("Input")]//Won't need the input this way because of new input System
     //public KeyCode grappleKey = KeyCode.Mouse1;
@@ -53,7 +54,7 @@ public class Harpoon : MonoBehaviour
     private void Start()
     {
         //GrappleVec = new Vector3(20, 4, 9);//just a text
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
        // pm = GetComponent<PlayerMovement>();
     }
 
@@ -65,16 +66,16 @@ public class Harpoon : MonoBehaviour
         /*if (Input.GetKeyDown(grappleKey)) StartGrapple(); //Don't need this input because of Player Input
         */
 
-        /*if(Input.GetKeyDown(KeyCode.U))//this also part of the grapple test
+        if(Input.GetKeyDown(KeyCode.U))//this also part of the grapple test
             {
-            ExcuteGrapple();
-            grappling = true;
-        }*/
+            //ExcuteGrapple();
+            harpooning = true;
+        }
 
 
-        if (grapplingCdTimer > 0)
+        if (harpoonCdTimer > 0)
         {
-            grapplingCdTimer -= Time.deltaTime;
+            harpoonCdTimer -= Time.deltaTime;
         }
 
         if (harpooning == true)
@@ -87,12 +88,12 @@ public class Harpoon : MonoBehaviour
 
 
     }
-    private void LateUpdate()
-    {
-        //if (grappling)
-        //    lr.SetPosition(0, mouthTip.position);
+    //private void LateUpdate()
+    //{
+    //    //if (grappling)
+    //    //    lr.SetPosition(0, mouthTip.position);
 
-    }
+    //}
 
 
 
@@ -162,16 +163,5 @@ public class Harpoon : MonoBehaviour
         //grapplingCdTimer = grapplingCd;
 
         //lr.enabled = false;
-    }
-
-
-    /// <summary>
-    /// For new input system sake
-    /// </summary>
-    void OnGrapple()
-    {
-        Debug.Log("I'm grappling thing");
-        StartHarpooning();
-
     }
 }
