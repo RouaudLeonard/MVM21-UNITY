@@ -16,10 +16,6 @@ public class AccelerationPhysic : MonoBehaviour
 
     public void AddToMoveVec(Vector2 force)
     {
-        if (!isPlayer)
-        {
-            print(moveVec);
-        }
         moveVec += force;
     }
 
@@ -32,18 +28,18 @@ public class AccelerationPhysic : MonoBehaviour
 
             Vector2 moveDir = new Vector2(horizontalInput, verticalInput).normalized;
 
-            calcMoveVec(moveDir);
+            CalcMoveVec(moveDir);
 
             rb.velocity = moveVec;
 
             return;
         }
 
-        calcMoveVec(Vector2.zero);
+        CalcMoveVec(Vector2.zero);
         rb.velocity = moveVec;
     }
 
-    void calcMoveVec(Vector2 moveDir)
+    void CalcMoveVec(Vector2 moveDir)
     {
         if (moveDir == Vector2.zero) 
         {
