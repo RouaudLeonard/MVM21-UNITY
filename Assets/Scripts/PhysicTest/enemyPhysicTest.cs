@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class physicTest : MonoBehaviour
+public class enemyPhysicTest : MonoBehaviour
 {
     public float moveAcceleration = 4;
     public float reverseAcceleration = 4;
@@ -19,12 +19,7 @@ public class physicTest : MonoBehaviour
 
     void Update()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        Vector2 moveDir = new Vector2(horizontalInput, verticalInput).normalized;
-
-        calcMoveVec(moveDir);
+        calcMoveVec(new Vector2(0, 0));
 
         rb.velocity = moveVec;
     }
