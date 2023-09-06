@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IsometricCharacterRenderer : MonoBehaviour
 {
-    public static readonly string[] directions = {"North","South","East", "West", "NorthEast","Nortwest", "SouthEast","SouthWest" };
+    public static readonly string[] directions = {"North","South","East", "West", "NorthEast","NortWest", "SouthEast","SouthWest" };
 
     Animator animator;
 
