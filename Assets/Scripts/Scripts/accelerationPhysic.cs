@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyPhysicTest : MonoBehaviour
+public class AccelerationPhysic : MonoBehaviour
 {
     public float moveAcceleration = 4;
     public float reverseAcceleration = 4;
     public float moveSpeedCap = 5;
+
+    public bool isPlayer = false;
 
     public Rigidbody2D rb;
 
@@ -14,13 +16,30 @@ public class enemyPhysicTest : MonoBehaviour
 
     public void AddToMoveVec(Vector2 force)
     {
+        if (!isPlayer)
+        {
+            print(moveVec);
+        }
         moveVec += force;
     }
 
     void Update()
     {
-        calcMoveVec(new Vector2(0, 0));
+        if (isPlayer)
+        {
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
 
+            Vector2 moveDir = new Vector2(horizontalInput, verticalInput).normalized;
+
+            calcMoveVec(moveDir);
+
+            rb.velocity = moveVec;
+
+            return;
+        }
+
+        calcMoveVec(Vector2.zero);
         rb.velocity = moveVec;
     }
 

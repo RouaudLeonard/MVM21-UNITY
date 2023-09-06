@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class hook : MonoBehaviour
+public class Hook : MonoBehaviour
 {
-    public float ropeLength = 10;
-    public float pullForce = 4;
+    public float ropeLength = 3;
+    public float pullForce = 3;
+
+    public LineRenderer lineRenderer;
+    public AccelerationPhysic accelerationPhysic;
 
     public GameObject hookedTo;
-    public LineRenderer lineRenderer;
-    public physicTest physic;
 
     void Update()
     {
+        if (hookedTo == null)
+        {
+            return;
+        }
+
         hookPhysic();
         drawLine();
     }
@@ -28,8 +34,8 @@ public class hook : MonoBehaviour
         float boatDistance = Vector2.Distance(hookedTo.transform.position, transform.position);
         if (boatDistance > ropeLength) {
             Vector2 ropeDir = (hookedTo.transform.position - transform.position).normalized;
-            physic.AddToMoveVec(getPullVec(ropeDir, boatDistance));
-            hookedTo.GetComponent<enemyPhysicTest>().AddToMoveVec(- getPullVec(ropeDir, boatDistance));
+            accelerationPhysic.AddToMoveVec(getPullVec(ropeDir, boatDistance));
+            hookedTo.GetComponent<AccelerationPhysic>().AddToMoveVec(- getPullVec(ropeDir, boatDistance));
         }
     }
 
