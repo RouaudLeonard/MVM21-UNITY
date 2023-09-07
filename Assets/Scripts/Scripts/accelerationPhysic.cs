@@ -7,6 +7,11 @@ public class AccelerationPhysic : MonoBehaviour
     public float moveAcceleration = 4;
     public float reverseAcceleration = 4;
     public float moveSpeedCap = 5;
+
+    public float turnAccelerationDeg = 30;
+    public float turnReverseAccelerationDeg = 30;
+    public float turnSpeedCapDegPerSec = 180;
+
     public float affectedByHook = 1;
 
     public bool isPlayer = false;
@@ -15,19 +20,33 @@ public class AccelerationPhysic : MonoBehaviour
 
     Vector2 moveVec = new Vector2();
 
+    LineRenderer lookDirLineRenderer;
+    Vector2 lookDir = Vector2.up;
+    float turnSpeedDeg = 0;
+
     public void AddToMoveVec(Vector2 force)
     {
         moveVec += force;
+    }
+
+    void Start()
+    {
+        lookDirLineRenderer = transform.Find("lookDir").GetComponent<LineRenderer>();
     }
 
     void Update()
     {
         if (isPlayer)
         {
+            DrawLookDir();
+
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
-            Vector2 moveDir = new Vector2(horizontalInput, verticalInput).normalized;
+            CalcTurnSpeed(horizontalInput);
+
+            lookDir = Quaternion.Euler(0, 0, turnSpeedDeg * Time.deltaTime) * lookDir;
+            Vector2 moveDir = lookDir * verticalInput;
 
             CalcMoveVec(moveDir);
 
@@ -64,5 +83,43 @@ public class AccelerationPhysic : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         moveVec = Vector2.zero;
+    }
+
+    void DrawLookDir()
+    {
+        Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
+        lookDirLineRenderer.SetPosition(0, transform.position);
+        lookDirLineRenderer.SetPosition(1, playerPos + lookDir * 1);
+    }
+
+    void CalcTurnSpeed(float horizontalInput)
+    {
+        if (horizontalInput != 0)
+        {
+            if (horizontalInput > 0)
+            {
+                turnSpeedDeg -= turnAccelerationDeg * Time.deltaTime;
+            }
+            if (horizontalInput < 0)
+            {
+                turnSpeedDeg += turnAccelerationDeg * Time.deltaTime;
+            }
+
+            turnSpeedDeg = Mathf.Clamp(turnSpeedDeg, -turnSpeedCapDegPerSec, turnSpeedCapDegPerSec);
+            return;
+        }
+
+        if (Mathf.Abs(turnSpeedDeg) < 0.1)
+        {
+            turnSpeedDeg = 0;
+        }
+        else if (turnSpeedDeg > 0)
+        {
+            turnSpeedDeg -= turnReverseAccelerationDeg * Time.deltaTime;
+        }
+        else if (turnSpeedDeg < 0)
+        {
+            turnSpeedDeg += turnReverseAccelerationDeg * Time.deltaTime;
+        }
     }
 }

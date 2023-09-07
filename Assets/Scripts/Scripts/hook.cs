@@ -45,7 +45,7 @@ public class Hook : MonoBehaviour
     void Update()
     {
         HookPhysic();
-        DrawLine();
+        DrawLines();
         LaunchUpdate();
 
         if (Input.GetMouseButtonDown(0))
@@ -54,7 +54,7 @@ public class Hook : MonoBehaviour
         }
     }
 
-    void DrawLine()
+    void DrawLines()
     {
         Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 aimDir = GetAimDir();
