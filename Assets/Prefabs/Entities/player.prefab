@@ -53,6 +53,7 @@ MonoBehaviour:
   moveAcceleration: 4
   reverseAcceleration: 4
   moveSpeedCap: 5
+  affectedByHook: 0.5
   isPlayer: 1
   rb: {fileID: -3744008654442695933}
 --- !u!114 &9187490659420911549
@@ -67,9 +68,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b68035507431624db1c07f37947050b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ropeLength: 10
-  pullForce: 4
+  ropeLength: 3
+  pullForce: 3
+  launchDistance: 5
+  launchSpeed: 4
+  hookRadius: 0.5
   accelerationPhysic: {fileID: 5830313166607414428}
+  cam: {fileID: 0}
+  enemyList: {fileID: 0}
+  hookedTo: {fileID: 0}
 --- !u!50 &-3744008654442695933
 Rigidbody2D:
   serializedVersion: 4
