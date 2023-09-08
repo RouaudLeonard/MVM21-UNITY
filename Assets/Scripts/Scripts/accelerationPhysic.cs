@@ -20,6 +20,7 @@ public class AccelerationPhysic : MonoBehaviour
     public Rigidbody2D rb;
 
     Vector2 moveVec = new Vector2();
+    Vector2 moveDir = new Vector2();
 
     LineRenderer lookDirLineRenderer;
     Vector2 lookDir = Vector2.up;
@@ -30,8 +31,17 @@ public class AccelerationPhysic : MonoBehaviour
         moveVec += force;
     }
 
+    public void Move(Vector2 inMoveDir)
+    {
+        moveDir = inMoveDir;
+    }
+
     void Start()
     {
+        if (!isPlayer)
+        {
+            return;
+        }
         lookDirLineRenderer = transform.Find("lookDir").GetComponent<LineRenderer>();
     }
 
@@ -48,20 +58,22 @@ public class AccelerationPhysic : MonoBehaviour
 
             lookDir = Quaternion.Euler(0, 0, turnSpeedDeg * Time.deltaTime) * lookDir;
 
-            Vector2 moveDir = new Vector2(horizontalInput, verticalInput);
+            moveDir = new Vector2(horizontalInput, verticalInput);
             if (useDirectionBasedMovement)
             {
                 moveDir = lookDir * verticalInput;
             }
 
             CalcMoveVec(moveDir);
+            moveDir = Vector2.zero;
 
             rb.velocity = moveVec;
 
             return;
         }
 
-        CalcMoveVec(Vector2.zero);
+        CalcMoveVec(moveDir);
+        moveDir = Vector2.zero;
         rb.velocity = moveVec;
     }
 
