@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     public AccelerationPhysic accelerationPhysic;
 
-    enum State
+    public enum State
     {
         IDLE,
         CHASING,
@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
     GameObject chasingZone;
     GameObject player;
 
-    State state = State.IDLE;
+    public State state = State.IDLE;
     bool attacked = false;
 
     void Start()
@@ -39,6 +39,10 @@ public class EnemyAI : MonoBehaviour
         else if (state == State.CHASING)
         {
             ChasingHandle();
+        }
+        else if (state == State.ESCAPING)
+        {
+            EscapingHandle();
         }
     }
 
@@ -78,6 +82,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void EscapingHandle()
+    {
+        MoveAwayFromPlayer();
+    }
+
     float DistanceFromPlayer()
     {
         return new Vector2(player.transform.position.x - transform.position.x,
@@ -94,5 +103,12 @@ public class EnemyAI : MonoBehaviour
         Vector2 dir = new Vector2(player.transform.position.x - transform.position.x,
                                     player.transform.position.y - transform.position.y).normalized;
         accelerationPhysic.Move(dir);
+    }
+
+    void MoveAwayFromPlayer()
+    {
+        Vector2 dir = new Vector2(player.transform.position.x - transform.position.x,
+                                    player.transform.position.y - transform.position.y).normalized;
+        accelerationPhysic.Move(- dir);
     }
 }

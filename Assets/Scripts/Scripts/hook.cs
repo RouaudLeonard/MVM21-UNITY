@@ -24,7 +24,7 @@ public class Hook : MonoBehaviour
     LineRenderer ropeLineRenderer;
     LineRenderer aimDirLineRenderer;
 
-    public GameObject hookedTo;
+    GameObject hookedTo;
     State state = State.UNHOOKED;
     Vector2 hookPos = new Vector2();
     Vector2 launchingDir = new Vector2();
@@ -117,7 +117,14 @@ public class Hook : MonoBehaviour
 
             if (Vector2.Distance(hookPos, enemyPos) < hookRadius)
             {
+                if (hookedTo != null)
+                {
+                    hookedTo.GetComponent<EnemyAI>().state = EnemyAI.State.IDLE;
+                }
+
                 hookedTo = enemy;
+                enemy.GetComponent<EnemyAI>().state = EnemyAI.State.ESCAPING;
+
                 state = State.HOOKED;
                 return;
             }
