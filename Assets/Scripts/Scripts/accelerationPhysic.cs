@@ -15,6 +15,7 @@ public class AccelerationPhysic : MonoBehaviour
     public float affectedByHook = 1;
 
     public bool isPlayer = false;
+    public bool useDirectionBasedMovement = false;
 
     public Rigidbody2D rb;
 
@@ -46,7 +47,12 @@ public class AccelerationPhysic : MonoBehaviour
             CalcTurnSpeed(horizontalInput);
 
             lookDir = Quaternion.Euler(0, 0, turnSpeedDeg * Time.deltaTime) * lookDir;
-            Vector2 moveDir = lookDir * verticalInput;
+
+            Vector2 moveDir = new Vector2(horizontalInput, verticalInput);
+            if (useDirectionBasedMovement)
+            {
+                moveDir = lookDir * verticalInput;
+            }
 
             CalcMoveVec(moveDir);
 
@@ -87,6 +93,13 @@ public class AccelerationPhysic : MonoBehaviour
 
     void DrawLookDir()
     {
+        if (!useDirectionBasedMovement)
+        {
+            lookDirLineRenderer.SetPosition(0, Vector2.zero);
+            lookDirLineRenderer.SetPosition(1, Vector2.zero);
+            return;
+        }
+
         Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
         lookDirLineRenderer.SetPosition(0, transform.position);
         lookDirLineRenderer.SetPosition(1, playerPos + lookDir * 1);
