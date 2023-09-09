@@ -8,26 +8,34 @@ public class Snake : MonoBehaviour
     //[SerializeField]
     //Vector2 snakePos;
 
-    public Camera cam;
-
+   // public Camera cam;
+   [SerializeField]
     private GameObject waterBall;
     
     private void Start()
     {
-        waterBall = PObjectPool.SharedInstance.GetPooledObject();
+        //waterBall = GetComponent<GameObject>();
        // wayPoint = GameObject.Find("wayPoint");
     }
 
     // Update is called once per frame
     void Update()
     {
+        waterBall = PObjectPool.SharedInstance.GetPooledObject();
+
+
+        waterBall.transform.position = transform.position;
+        waterBall.SetActive(true);
+
+
         Attack();
 
         if (Input.GetMouseButtonDown(0))
         {
+            Attack();
            // Ray2D ray = cam.ScreenPointToRay(Input.mousePosition);
                 
-                cam.ScreenPointToRay(Input.mousePosition);
+               // cam.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit2D hit;
 
@@ -49,10 +57,12 @@ public class Snake : MonoBehaviour
 
     void Attack()
     {
-        waterBall.transform.position = transform.position;
-        waterBall.SetActive(true);
+        Debug.Log("Attack Started");
 
-        
+
+    
+
+      
     }
     /*Start()
 {//initialize variables

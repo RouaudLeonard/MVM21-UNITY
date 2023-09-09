@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     public Transform target;
     Vector2 orientation;
-    public float speed = 5f;
+    private AIEnemey aI;
+    public float speed = 10f;
     float rotateSpeed = 200f;
     // Start is called before the first frame update
     void Start()
@@ -31,8 +32,4 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.up * speed;
 
     }
-    //private void Update()
-    //{
-    //    transform.Translate(orientation);
-    //}
 }
