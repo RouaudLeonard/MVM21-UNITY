@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (enemyPos == playerPos)
         {
+            return;
+
             currentHealth = currentHealth - enemyDamage;
 
             Debug.Log("You are now at " + currentHealth + "HP");

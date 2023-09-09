@@ -47,7 +47,7 @@ public class AIEnemey : MonoBehaviour
     }
 
     // Update is called once per frame
-    void fixedUpdate()// ideqal with working with physics
+    void FixedUpdate()// ideqal with working with physics
     {
         if (path == null)
         {

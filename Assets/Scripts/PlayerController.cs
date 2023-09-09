@@ -11,32 +11,30 @@ public class PlayerController : MonoBehaviour
     IsometricCharacterRenderer isoRenderer;
     float horizontalInput;
     float verticalInput;
+    //float momentum;
+    //float velocity = 1f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate()
+    void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        inputVector = new(horizontalInput, verticalInput);
+        inputVector.Set(horizontalInput, verticalInput);
 
-        inputVector = Vector2.ClampMagnitude(inputVector, 1);
+        inputVector.Normalize(); ;
 
-        Move();
-       // isoRenderer.SetDirection(inputVector);
-    }
-    void Update()
-    {
-        float velocity = 6;
 
-        //velocity  = distance/time
-        //rb.AddForce(Vector2.down,ForceMode2D.Impulse);
+       // velocity = distance / time
+        rb.AddForce(Vector2.down, ForceMode2D.Impulse);
 
-        float momentum = rb.mass * velocity;
-        Look();
+        //float momentum = rb.mass * velocity;
+
+
+
     }
     /// <summary>
     /// Instead of strafing, turn in the direction the player is looking at.
@@ -58,5 +56,14 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.MovePosition(transform.position + inputVector.normalized.magnitude * speed * Time.deltaTime * transform.forward);
+    }
+    void FixedUpdate()
+    {
+        
+
+        Move();
+
+        Look();
+        isoRenderer.SetDirection(inputVector);
     }
 }

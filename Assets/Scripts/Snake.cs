@@ -9,7 +9,7 @@ public class Snake : MonoBehaviour
     //Vector2 snakePos;
 
     public Camera cam;
-    public NavMeshAgent agent;
+    
     private void Start()
     {
         
