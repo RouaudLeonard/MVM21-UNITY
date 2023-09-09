@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
+    [SerializeField] Animator animator;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float rotationSpeed = 360f;
     private Vector2 inputVector;
@@ -23,13 +24,14 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        inputVector.Set(horizontalInput, verticalInput);
+        //inputVector.Set(horizontalInput, verticalInput);
 
-        inputVector.Normalize(); ;
+        //inputVector.Normalize();
 
+        rb.MovePosition(transform.position + inputVector.normalized.magnitude * speed * Time.fixedTime * transform.forward);
 
-       // velocity = distance / time
-        rb.AddForce(Vector2.down, ForceMode2D.Impulse);
+        // velocity = distance / time
+        //rb.AddForce(Vector2.down, ForceMode2D.Impulse);
 
         //float momentum = rb.mass * velocity;
 
@@ -48,14 +50,16 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        
+       // var rotation = Quaternion.LookRotation(inputVector.ToIso(), Vector2.up);
 
-        var rotation = Quaternion.LookRotation(inputVector.ToIso(), Vector2.up);
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation,rotation, rotationSpeed);
     }
     void Move()
     {
-        rb.MovePosition(transform.position + inputVector.normalized.magnitude * speed * Time.deltaTime * transform.forward);
+        //rb.rotation = transform.rotation.
+        
+        //animator.SetFloat("Speed"
     }
     void FixedUpdate()
     {
@@ -63,7 +67,6 @@ public class PlayerController : MonoBehaviour
 
         Move();
 
-        Look();
-        isoRenderer.SetDirection(inputVector);
+       
     }
 }

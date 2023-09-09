@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GameObject))]
 public class DiveSpit : MonoBehaviour
 {
     public Rigidbody projectile;
@@ -14,15 +15,16 @@ public class DiveSpit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Instantiate(GameObject.CreatePrimitive(PrimitiveType.Capsule));
-        // Instantiate the projectile at the position and rotation of this transform
-        Rigidbody clone;
-        clone = Instantiate(projectile, transform.position, transform.rotation);
+        //Instantiate(GameObject.CreatePrimitive(PrimitiveType.Capsule));
+        //// Instantiate the projectile at the position and rotation of this transform
+        //Rigidbody clone;
+        //clone = Instantiate(projectile, transform.position, transform.rotation);
 
-        // Give the cloned object an initial velocity along the current
-        // object's Z axis
-        clone.velocity = transform.TransformDirection(Vector3.forward * 10);
+        //// Give the cloned object an initial velocity along the current
+        //// object's Z axis
+        //clone.velocity = transform.TransformDirection(Vector3.forward * 10);
     }
+    ///Object Pool script for the enemies
     /*public static ObjectPool SharedInstance;
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
