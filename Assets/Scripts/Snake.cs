@@ -9,15 +9,20 @@ public class Snake : MonoBehaviour
     //Vector2 snakePos;
 
     public Camera cam;
+
+    private GameObject waterBall;
     
     private void Start()
     {
-        
+        waterBall = PObjectPool.SharedInstance.GetPooledObject();
+       // wayPoint = GameObject.Find("wayPoint");
     }
 
     // Update is called once per frame
     void Update()
     {
+        Attack();
+
         if (Input.GetMouseButtonDown(0))
         {
            // Ray2D ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -36,6 +41,18 @@ public class Snake : MonoBehaviour
 
 
         }
+
+       // wayPointPos = new Vector3(wayPoint.transform.position.x, transform.position.y, wayPoint.transform.position.z);
+        //Here, the zombie's will follow the waypoint.
+       // transform.position = Vector3.MoveTowards(transform.position, wayPointPos, speed * Time.deltaTime);
+    }
+
+    void Attack()
+    {
+        waterBall.transform.position = transform.position;
+        waterBall.SetActive(true);
+
+        
     }
     /*Start()
 {//initialize variables
@@ -86,4 +103,13 @@ Spit Attack()
 // when equal deal damage.
 }
 */
+
+    //You may consider adding a rigid body to the zombie for accurate physics simulation
+    private GameObject wayPoint;
+
+    private Vector2 wayPointPos;
+
+    //This will be the zombie's speed. Adjust as necessary.
+    private float speed = 6.0f;
+
 }

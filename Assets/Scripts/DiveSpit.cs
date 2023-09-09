@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(GameObject))]
 public class DiveSpit : MonoBehaviour
 {
-    public Rigidbody projectile;
+    public GameObject projectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class DiveSpit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Instantiate(GameObject.CreatePrimitive(PrimitiveType.Capsule));
+        //Instantiate<GameObject>;
         //// Instantiate the projectile at the position and rotation of this transform
         //Rigidbody clone;
         //clone = Instantiate(projectile, transform.position, transform.rotation);
@@ -25,36 +25,5 @@ public class DiveSpit : MonoBehaviour
         //clone.velocity = transform.TransformDirection(Vector3.forward * 10);
     }
     ///Object Pool script for the enemies
-    /*public static ObjectPool SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
-    private void Awake()
-    {
-        SharedInstance = this;
-
-    }
-    private void Start()
-    {
-        pooledObjects = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountToPool; i++)
-        {
-            tmp = Instantiate(objectToPool);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
-        }
-    }
-    public GameObject GetPooledObject()
-    {
-        for (int i = 0; i < amountToPool; i++)
-        {
-            if (!pooledObjects[i].activeInHierarchy)
-            {
-                return pooledObjects[i];
-            }
-        }
-        return null;
-    }*/
 
 }

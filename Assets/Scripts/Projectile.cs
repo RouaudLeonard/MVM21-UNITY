@@ -23,12 +23,16 @@ public class Projectile : MonoBehaviour
         Vector2 direction = (Vector2)target.position - rb.position;
         direction.Normalize();
 
-       float rotateAmount =  Vector3.Cross(direction, transform.up).z;
+        float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
 
-        rb.angularVelocity = rotateAmount * rotateSpeed;
+        rb.angularVelocity = -rotateAmount * rotateSpeed;
 
         rb.velocity = transform.up * speed;
-      
+
     }
+    //private void Update()
+    //{
+    //    transform.Translate(orientation);
+    //}
 }
