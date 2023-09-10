@@ -29,6 +29,17 @@ public class Hook : MonoBehaviour
     Vector2 hookPos = new Vector2();
     Vector2 launchingDir = new Vector2();
 
+    public void Unhook()
+    {
+        if (state != State.HOOKED)
+        {
+            return;
+        }
+        state = State.UNHOOKED;
+        hookedTo.GetComponent<EnemyAI>().state = EnemyAI.State.IDLE;
+        hookedTo = null;
+    }
+
     void Start()
     {
         ropeLineRenderer = transform.Find("rope").GetComponent<LineRenderer>();

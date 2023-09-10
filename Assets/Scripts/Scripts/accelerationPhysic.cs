@@ -101,6 +101,13 @@ public class AccelerationPhysic : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         moveVec = Vector2.zero;
+
+        if (!isPlayer)
+        {
+            return;
+        }
+
+        GetComponent<Hook>().Unhook();
     }
 
     void DrawLookDir()
