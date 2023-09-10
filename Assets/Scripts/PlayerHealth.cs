@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
     float maxHealth = 100;
     LayerMask Enemy;
     float enemyDamage = 5f;
-   private Transform playerPos;
+    private Transform playerPos;
     Transform enemyPos;
     void Start()
     {

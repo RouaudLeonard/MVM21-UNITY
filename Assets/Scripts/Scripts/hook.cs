@@ -48,6 +48,12 @@ public class Hook : MonoBehaviour
 
     void Launch(Vector2 dir)
     {
+        if (hookedTo != null)
+        {
+            hookedTo.GetComponent<EnemyAI>().state = EnemyAI.State.IDLE;
+            hookedTo = null;
+        }
+
         state = State.LAUNCHING;
         hookPos = transform.position;
         launchingDir = GetAimDir();
@@ -126,7 +132,8 @@ public class Hook : MonoBehaviour
             GameObject enemy = enemyList.transform.GetChild(i).gameObject;
             Vector2 enemyPos = enemy.transform.position;
 
-            if (Vector2.Distance(hookPos, enemyPos) < hookRadius)
+            if (Vector2.Distance(hookPos, enemyPos) < hookRadius 
+            && !enemy.GetComponent<AccelerationPhysic>().HookedToShell(launchingDir))
             {
                 if (hookedTo != null)
                 {

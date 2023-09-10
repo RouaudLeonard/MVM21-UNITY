@@ -14,17 +14,36 @@ public class AccelerationPhysic : MonoBehaviour
 
     public float affectedByHook = 1;
 
+    public bool hasShell = false;
+
     public bool isPlayer = false;
     public bool useDirectionBasedMovement = false;
 
     public Rigidbody2D rb;
 
+    Vector2 latestMoveVec = Vector2.right;
     Vector2 moveVec = new Vector2();
     Vector2 moveDir = new Vector2();
 
     LineRenderer lookDirLineRenderer;
     Vector2 lookDir = Vector2.up;
     float turnSpeedDeg = 0;
+
+    public bool HookedToShell(Vector2 hookDir)
+    {
+        if (!hasShell)
+        {
+            return false;
+        }
+
+        if (Vector2.Dot(latestMoveVec.normalized, hookDir.normalized) > 0)
+        {
+            print(Vector2.Dot(latestMoveVec.normalized, hookDir.normalized));
+            return true;
+        }
+
+        return false;
+    }
 
     public void AddToMoveVec(Vector2 force)
     {
@@ -38,19 +57,18 @@ public class AccelerationPhysic : MonoBehaviour
 
     void Start()
     {
-        if (!isPlayer)
-        {
-            return;
-        }
         lookDirLineRenderer = transform.Find("lookDir").GetComponent<LineRenderer>();
     }
 
     void Update()
     {
+        if (moveVec != Vector2.zero)
+        {
+            latestMoveVec = moveVec;
+        }
+
         if (isPlayer)
         {
-            DrawLookDir();
-
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -71,6 +89,8 @@ public class AccelerationPhysic : MonoBehaviour
 
             return;
         }
+
+        DrawLookDir();
 
         CalcMoveVec(moveDir);
         moveDir = Vector2.zero;
@@ -112,6 +132,14 @@ public class AccelerationPhysic : MonoBehaviour
 
     void DrawLookDir()
     {
+        if (!isPlayer)
+        {
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y);
+            lookDirLineRenderer.SetPosition(0, transform.position);
+            lookDirLineRenderer.SetPosition(1, pos + latestMoveVec.normalized * 1);
+            return;
+        }
+
         if (!useDirectionBasedMovement)
         {
             lookDirLineRenderer.SetPosition(0, Vector2.zero);
