@@ -16,6 +16,7 @@ public class Hook : MonoBehaviour
     public float launchDistance = 5;
     public float launchSpeed = 2;
     public float hookRadius = 0.5f;
+    public float launchCooldownSec = 1;
 
     public AccelerationPhysic accelerationPhysic;
     public Camera cam;
@@ -28,6 +29,7 @@ public class Hook : MonoBehaviour
     State state = State.UNHOOKED;
     Vector2 hookPos = new Vector2();
     Vector2 launchingDir = new Vector2();
+    float launchCooldownCount = 0;
 
     public void Unhook()
     {
@@ -61,12 +63,15 @@ public class Hook : MonoBehaviour
 
     void Update()
     {
+        launchCooldownCount -= Time.deltaTime;
+
         HookPhysic();
         DrawLines();
         LaunchUpdate();
 
-        if (Input.GetMouseButtonDown(0))
+        if (launchCooldownCount < 0 && Input.GetMouseButtonDown(0))
         {
+            launchCooldownCount = launchCooldownSec;
             Launch(GetAimDir());
         }
     }

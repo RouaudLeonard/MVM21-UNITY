@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    public float attackCooldownSec = 1;
     public AccelerationPhysic accelerationPhysic;
 
     public enum State
@@ -19,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     GameObject player;
 
     public State state = State.IDLE;
-    bool attacked = false;
+    float attackCooldownCount = 0;
 
     void Start()
     {
@@ -32,6 +33,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        attackCooldownCount -= Time.deltaTime;
+
         if (state == State.IDLE)
         {
             IdleHandle();
@@ -60,15 +63,11 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceFromPlayer < attackZone.GetComponent<CircleRenderer>().range)
         {
-            if (!attacked)
+            if (attackCooldownCount < 0)
             {
-                attacked = true;
+                attackCooldownCount = attackCooldownSec;
                 Attack();
             }
-        }
-        else if (distanceFromPlayer >= attackZone.GetComponent<CircleRenderer>().range)
-        {
-            attacked = false;
         }
 
         if (distanceFromPlayer >= chasingZone.GetComponent<CircleRenderer>().range)
