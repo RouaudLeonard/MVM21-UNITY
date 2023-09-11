@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleRenderer : MonoBehaviour
-{
-    const bool SHOW = true;
-    
+{    
     public float range = 5;
 
     public LineRenderer lineRenderer;
 
+    bool show = false;
+
     void Update()
     {
-        if (!SHOW)
+        if (Input.GetKeyDown("c"))
+        {
+            show = !show;
+        }
+
+        if (!show)
         {
             for (int i = 0; i < 20; i += 1)
             {

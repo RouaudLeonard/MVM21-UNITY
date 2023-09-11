@@ -30,6 +30,8 @@ public class AccelerationPhysic : MonoBehaviour
     Vector2 lookDir = Vector2.up;
     float turnSpeedDeg = 0;
 
+    bool showMoveVec = false;
+
     public bool HookedToShell(Vector2 hookDir)
     {
         if (!hasShell)
@@ -93,6 +95,11 @@ public class AccelerationPhysic : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown("c"))
+        {
+            showMoveVec = !showMoveVec;
+        }
+
         DrawLookDir();
 
         CalcMoveVec(moveDir);
@@ -135,7 +142,7 @@ public class AccelerationPhysic : MonoBehaviour
 
     void DrawLookDir()
     {
-        if (!isPlayer)
+        if (!isPlayer && showMoveVec)
         {
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             lookDirLineRenderer.SetPosition(0, transform.position);
