@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
     {
-        print("Attack");
+        player.GetComponent<PlayerHealth>().CurrentHealth -= 25;
     }
 
     void MoveToPlayer()
