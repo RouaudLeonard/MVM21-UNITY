@@ -41,7 +41,6 @@ public class AccelerationPhysic : MonoBehaviour
 
         if (Vector2.Dot(latestMoveVec.normalized, hookDir.normalized) > 0)
         {
-            print(Vector2.Dot(latestMoveVec.normalized, hookDir.normalized));
             return true;
         }
 

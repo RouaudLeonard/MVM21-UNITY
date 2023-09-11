@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
         visionZone = transform.Find("visionZone").gameObject;
         chasingZone = transform.Find("chasingZone").gameObject;
 
-        player = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[0];
+        player = transform.parent.gameObject.GetComponent<EnemyList>().player;
     }
 
     void Update()
