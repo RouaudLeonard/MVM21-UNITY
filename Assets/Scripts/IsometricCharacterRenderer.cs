@@ -4,33 +4,22 @@ using UnityEngine;
 
 public class IsometricCharacterRenderer : MonoBehaviour
 {
-    public static readonly string[] directions = {"North","South","East", "West", "NorthEast","NortWest", "SouthEast","SouthWest" };
+    public static readonly string[] directions = {
+        "North",
+        "NortWest",
+        "West",
+        "SouthWest",
+        "South",
+        "SouthEast",
+        "East",
+        "NorthEast",
+    };
 
-    Animator animator;
-
-    int lastDirection;
-
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    public Animator animator;
 
     public void SetDirection(Vector2 direction)
     {
-        string[] directionArray = null;
-
-        if (direction.magnitude<.01f)
-        {
-            directionArray = directions;
-        }
-        else
-        {
-           // directionArray = runDirections;
-            lastDirection = DirectionToIndex(direction, 8);
-        }
-
-        animator.Play(directionArray[lastDirection]);
+        animator.Play(directions[DirectionToIndex(direction, 8)]);
     }
 
     public static int DirectionToIndex(Vector2 dir, int sliceCount)

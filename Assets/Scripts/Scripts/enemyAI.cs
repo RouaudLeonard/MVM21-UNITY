@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float attackCooldownSec = 1;
+    public float attackDamage = 25;
+
     public AccelerationPhysic accelerationPhysic;
 
     public enum State
@@ -28,7 +30,7 @@ public class EnemyAI : MonoBehaviour
         visionZone = transform.Find("visionZone").gameObject;
         chasingZone = transform.Find("chasingZone").gameObject;
 
-        player = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[0];
+        player = transform.parent.gameObject.GetComponent<EnemyList>().player;
     }
 
     void Update()
@@ -94,7 +96,7 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
     {
-        print("Attack");
+        player.GetComponent<PlayerHealth>().CurrentHealth -= attackDamage;
     }
 
     void MoveToPlayer()

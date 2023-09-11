@@ -20,6 +20,7 @@ public class AccelerationPhysic : MonoBehaviour
     public bool useDirectionBasedMovement = false;
 
     public Rigidbody2D rb;
+    public IsometricCharacterRenderer icr;
 
     Vector2 latestMoveVec = Vector2.right;
     Vector2 moveVec = new Vector2();
@@ -28,6 +29,8 @@ public class AccelerationPhysic : MonoBehaviour
     LineRenderer lookDirLineRenderer;
     Vector2 lookDir = Vector2.up;
     float turnSpeedDeg = 0;
+
+    bool showMoveVec = false;
 
     public bool HookedToShell(Vector2 hookDir)
     {
@@ -38,7 +41,6 @@ public class AccelerationPhysic : MonoBehaviour
 
         if (Vector2.Dot(latestMoveVec.normalized, hookDir.normalized) > 0)
         {
-            print(Vector2.Dot(latestMoveVec.normalized, hookDir.normalized));
             return true;
         }
 
@@ -69,6 +71,8 @@ public class AccelerationPhysic : MonoBehaviour
 
         if (isPlayer)
         {
+            SetPlayerAnimationDir();
+
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -88,6 +92,11 @@ public class AccelerationPhysic : MonoBehaviour
             rb.velocity = moveVec;
 
             return;
+        }
+
+        if (Input.GetKeyDown("c"))
+        {
+            showMoveVec = !showMoveVec;
         }
 
         DrawLookDir();
@@ -132,7 +141,7 @@ public class AccelerationPhysic : MonoBehaviour
 
     void DrawLookDir()
     {
-        if (!isPlayer)
+        if (!isPlayer && showMoveVec)
         {
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             lookDirLineRenderer.SetPosition(0, transform.position);
@@ -181,5 +190,10 @@ public class AccelerationPhysic : MonoBehaviour
         {
             turnSpeedDeg += turnReverseAccelerationDeg * Time.deltaTime;
         }
+    }
+
+    void SetPlayerAnimationDir()
+    {
+        icr.SetDirection(latestMoveVec);
     }
 }

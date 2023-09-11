@@ -4,33 +4,44 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float maxHealth = 100;
 
-    float currentHealth;
-    float maxHealth = 100;
-    LayerMask Enemy;
-    float enemyDamage = 5f;
-    private Transform playerPos;
-    Transform enemyPos;
-    void Start()
+    public Bar healthBar;
+
+    // Init to 1 because if init to 0 CurrentHealth property wont be able to modify currentHealth field
+    float currentHealth = 1;
+    public float CurrentHealth
     {
-        currentHealth = maxHealth;
-    }
+        get { return currentHealth; }
+        set {
+            if (currentHealth == 0)
+            {
+                return;
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (enemyPos == playerPos)
-        {
-            return;
+            currentHealth = value;
 
-            currentHealth = currentHealth - enemyDamage;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            if (currentHealth < 0)
+            {
+                currentHealth = 0;
+                PlayerDied();
+            }
 
-            Debug.Log("You are now at " + currentHealth + "HP");
+            healthBar.filled = currentHealth / maxHealth;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    void Start()
     {
-//if gets hit by enemy or enemy fire, deal damage.
+        CurrentHealth = maxHealth;
+    }
+
+    void PlayerDied()
+    {
+        
     }
 }
