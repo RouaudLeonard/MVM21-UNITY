@@ -20,6 +20,7 @@ public class AccelerationPhysic : MonoBehaviour
     public bool useDirectionBasedMovement = false;
 
     public Rigidbody2D rb;
+    public IsometricCharacterRenderer icr;
 
     Vector2 latestMoveVec = Vector2.right;
     Vector2 moveVec = new Vector2();
@@ -69,6 +70,8 @@ public class AccelerationPhysic : MonoBehaviour
 
         if (isPlayer)
         {
+            SetPlayerAnimationDir();
+
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -181,5 +184,10 @@ public class AccelerationPhysic : MonoBehaviour
         {
             turnSpeedDeg += turnReverseAccelerationDeg * Time.deltaTime;
         }
+    }
+
+    void SetPlayerAnimationDir()
+    {
+        icr.SetDirection(latestMoveVec);
     }
 }
