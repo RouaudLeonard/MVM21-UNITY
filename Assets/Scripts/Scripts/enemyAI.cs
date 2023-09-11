@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float attackCooldownSec = 1;
+    public float attackDamage = 25;
+
     public AccelerationPhysic accelerationPhysic;
 
     public enum State
@@ -94,7 +96,7 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
     {
-        player.GetComponent<PlayerHealth>().CurrentHealth -= 25;
+        player.GetComponent<PlayerHealth>().CurrentHealth -= attackDamage;
     }
 
     void MoveToPlayer()
