@@ -29,7 +29,7 @@ public class EnemyEnergy : MonoBehaviour
             if (currentEnergy <= 0)
             {
                 currentEnergy = 0;
-                EnemyDied();
+                EnergyDepleted();
             }
 
             energyBar.filled = currentEnergy / maxEnergy;
@@ -48,7 +48,7 @@ public class EnemyEnergy : MonoBehaviour
         }
     }
 
-    void EnemyDied()
+    void EnergyDepleted()
     {
         print("enemy died");
     }
