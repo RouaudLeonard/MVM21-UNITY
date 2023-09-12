@@ -5,4 +5,5 @@ using UnityEngine;
 public class EnemyList : MonoBehaviour
 {
     public GameObject player;
+    public GameObject enemyProjectileList;
 }

@@ -188,17 +188,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dab62ea48f05f44983c2c211041bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAcceleration: 4
-  reverseAcceleration: 4
-  moveSpeedCap: 5
+  moveAcceleration: 9999
+  reverseAcceleration: 200
+  moveSpeedCap: 0.9
   turnAccelerationDeg: 30
   turnReverseAccelerationDeg: 30
   turnSpeedCapDegPerSec: 180
-  affectedByHook: 1
+  affectedByHook: 0.8
   hasShell: 0
   isPlayer: 0
   useDirectionBasedMovement: 0
   rb: {fileID: -783868752582964255}
+  icr: {fileID: 0}
 --- !u!114 &8502868273316402719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc57a6cb310a044286cc38f5e1a3889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldownSec: 1
+  attackDamage: 25
   accelerationPhysic: {fileID: 3219076624842026942}
   state: 0
 --- !u!50 &-783868752582964255
