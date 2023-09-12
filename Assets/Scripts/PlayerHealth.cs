@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 currentHealth = maxHealth;
             }
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 PlayerDied();
@@ -41,6 +41,6 @@ public class PlayerHealth : MonoBehaviour
 
     void PlayerDied()
     {
-        
+        print("player died");
     }
 }

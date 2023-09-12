@@ -26,7 +26,7 @@ public class EnemyEnergy : MonoBehaviour
             {
                 currentEnergy = maxEnergy;
             }
-            if (currentEnergy < 0)
+            if (currentEnergy <= 0)
             {
                 currentEnergy = 0;
                 EnemyDied();
@@ -50,6 +50,6 @@ public class EnemyEnergy : MonoBehaviour
 
     void EnemyDied()
     {
-
+        print("enemy died");
     }
 }
