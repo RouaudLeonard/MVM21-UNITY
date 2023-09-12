@@ -8,8 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     public Bar healthBar;
 
-    // Init to 1 because if init to 0 CurrentHealth property wont be able to modify currentHealth field
-    float currentHealth = 1;
+    float currentHealth = 0;
     public float CurrentHealth
     {
         get { return currentHealth; }
@@ -37,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        CurrentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     void PlayerDied()
