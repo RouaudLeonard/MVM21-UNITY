@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpittingSnakeConeVisionAngle : MonoBehaviour
 {
     public float angleDeg = 40;
-    public float nearRange = 2;
+    public float nearRange = 1;
     public LineRenderer lr;
 
     Vector2 dir = new Vector2();
@@ -57,7 +57,7 @@ public class SpittingSnakeConeVisionAngle : MonoBehaviour
 
         Vector2 playerDir = new Vector2(player.transform.position.x - transform.position.x,
                                     player.transform.position.y - transform.position.y).normalized;
-        lr.SetPosition(4, pos + playerDir * nearRange);
+        lr.SetPosition(4, pos);
         lr.SetPosition(5, latestRaycastResult.point);
     }
 
