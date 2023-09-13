@@ -48,6 +48,11 @@ public class Hook : MonoBehaviour
         aimDirLineRenderer = transform.Find("hookAimDir").GetComponent<LineRenderer>();
     }
 
+    void PlaySound(string path)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
+    }
+
     void Launch(Vector2 dir)
     {
         if (hookedTo != null)

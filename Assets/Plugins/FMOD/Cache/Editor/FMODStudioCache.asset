@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5094447238593362182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/HarpoonHit
+  m_EditorClassIdentifier: 
+  Path: event:/Player/HarpoonHit
+  Guid:
+    Data1: 1120292958
+    Data2: 1099570046
+    Data3: -1605795141
+    Data4: -1169607915
+  Banks:
+  - {fileID: -405088285860628012}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4843347022086462848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Harpoon Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Harpoon Shot
+  Guid:
+    Data1: 596102307
+    Data2: 1125771510
+    Data3: 1489315988
+    Data4: -732524260
+  Banks:
+  - {fileID: -405088285860628012}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1904149836347789558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +69,7 @@ MonoBehaviour:
   Path: FMOD Banks/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638295251254047511
+  lastModified: 638301608011747933
   FileSizes: []
   Exists: 1
 --- !u!114 &-1497468722506795737
@@ -45,6 +99,51 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 98183
+--- !u!114 &-828654856055777140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/PlayerHit
+  m_EditorClassIdentifier: 
+  Path: event:/Player/PlayerHit
+  Guid:
+    Data1: 1180200872
+    Data2: 1214921796
+    Data3: -857069647
+    Data4: -801415820
+  Banks:
+  - {fileID: -405088285860628012}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-405088285860628012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Player.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD Banks/Player.bank
+  Name: Player
+  StudioPath: bank:/Player
+  lastModified: 638301608014021854
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,14 +160,18 @@ MonoBehaviour:
   - {fileID: 5695890691994851663}
   - {fileID: -1904149836347789558}
   - {fileID: 157965456622401491}
+  - {fileID: -405088285860628012}
   EditorEvents:
   - {fileID: -1497468722506795737}
+  - {fileID: -5094447238593362182}
+  - {fileID: -4843347022086462848}
+  - {fileID: -828654856055777140}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1904149836347789558}
   StringsBanks:
   - {fileID: 5695890691994851663}
-  cacheTime: 638295251254749375
+  cacheTime: 638301608014021854
   cacheVersion: 131607
 --- !u!114 &157965456622401491
 MonoBehaviour:
@@ -85,7 +188,7 @@ MonoBehaviour:
   Path: FMOD Banks/Zone1.bank
   Name: Zone1
   StudioPath: bank:/Zone1
-  lastModified: 638295251254749375
+  lastModified: 638301608012206706
   FileSizes: []
   Exists: 1
 --- !u!114 &5695890691994851663
@@ -103,8 +206,8 @@ MonoBehaviour:
   Path: FMOD Banks/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638295251254047511
+  lastModified: 638301608011757911
   FileSizes:
   - Name: 
-    Value: 812
+    Value: 1008
   Exists: 1
