@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleDeg: 40
+  nearRange: 1
   lr: {fileID: 570952959241471421}
 --- !u!120 &570952959241471421
 LineRenderer:
@@ -398,6 +399,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7596951081117800262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2264619462084608345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8502868273316402719, guid: f060415e4102b604da99fedf95135bd7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7596951081117800262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628904533783275638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc57a6cb310a044286cc38f5e1a3889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3628904533783275638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6571244095522422576, guid: f060415e4102b604da99fedf95135bd7,
@@ -418,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionConeDirection: {fileID: 6964784414193244952}
   turretPoint: {fileID: 4143102383688001455}
+  enemyAI: {fileID: 2264619462084608345}
 --- !u!114 &3262121429023403253
 MonoBehaviour:
   m_ObjectHideFlags: 0

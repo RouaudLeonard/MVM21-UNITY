@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     GameObject player;
 
     public State state = State.IDLE;
+    public bool enabled = true;
     float attackCooldownCount = 0;
 
     void Start()
@@ -101,6 +102,11 @@ public class EnemyAI : MonoBehaviour
 
     void MoveToPlayer()
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         Vector2 dir = new Vector2(player.transform.position.x - transform.position.x,
                                     player.transform.position.y - transform.position.y).normalized;
         accelerationPhysic.Move(dir);
@@ -108,6 +114,11 @@ public class EnemyAI : MonoBehaviour
 
     void MoveAwayFromPlayer()
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         Vector2 dir = new Vector2(player.transform.position.x - transform.position.x,
                                     player.transform.position.y - transform.position.y).normalized;
         accelerationPhysic.Move(- dir);

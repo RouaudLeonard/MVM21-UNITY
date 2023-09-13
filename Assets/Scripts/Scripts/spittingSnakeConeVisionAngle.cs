@@ -15,6 +15,11 @@ public class SpittingSnakeConeVisionAngle : MonoBehaviour
     bool show = false;
     RaycastHit2D latestRaycastResult;
 
+    public bool CanSeePlayer()
+    {
+        return NoObstacle() && PlayerIsInsideAngle();
+    }
+
     void Start()
     {
         Transform dirTransform = transform.parent.transform.Find("coneVisionDirection");
@@ -44,7 +49,6 @@ public class SpittingSnakeConeVisionAngle : MonoBehaviour
 
         Vector2 dir_0 = dir;
         Vector2 dir_1 = dir;
-        Vector2 dir_2 = new Vector2();
 
         dir_0 = Quaternion.Euler(0, 0, -angleDeg/2) * dir_0;
         dir_1 = Quaternion.Euler(0, 0,  angleDeg/2) * dir_1;
@@ -59,11 +63,6 @@ public class SpittingSnakeConeVisionAngle : MonoBehaviour
                                     player.transform.position.y - transform.position.y).normalized;
         lr.SetPosition(4, pos);
         lr.SetPosition(5, latestRaycastResult.point);
-    }
-
-    bool CanSeePlayer()
-    {
-        return NoObstacle() && PlayerIsInsideAngle();
     }
 
     bool NoObstacle()
