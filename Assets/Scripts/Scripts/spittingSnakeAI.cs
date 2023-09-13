@@ -15,6 +15,7 @@ public class SpittingSnakeAI : MonoBehaviour
     public float timeToTurretPointSec = 2;
     public float timeUntilBackToOriginalPos = 10;
     public EnemyAI enemyAI;
+    public ProjectileLauncher projectileLauncher;
 
     GameObject coneVisionRange;
     GameObject coneVisionAngle;
@@ -37,20 +38,29 @@ public class SpittingSnakeAI : MonoBehaviour
 
             if (state == State.STATIC)
             {
+                projectileLauncher.enabled = false;
                 enemyAI.enabled = false;
 
                 swapPlaceCountDownSec = timeToTurretPointSec;
+
+                // Handle animation here
             }
             else if (state == State.ATTACKING)
             {
+                projectileLauncher.enabled = true;
                 enemyAI.enabled = false;
 
                 swapPlaceCountDownSec = timeToTurretPointSec;
                 timeUntilBackToOriginalPosCountDown = timeUntilBackToOriginalPos;
+
+                // Handle animation here
             }
             else if (state == State.HOOKED)
             {
+                projectileLauncher.enabled = false;
                 enemyAI.enabled = true;
+
+                // Handle animation here
             }
         }
     }

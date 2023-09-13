@@ -13,6 +13,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     float projectileCooldownCount = 0;
 
+    public bool enabled = false;
+
     void Start()
     {
         projectileZone = transform.Find("projectileZone").gameObject;
@@ -41,6 +43,11 @@ public class ProjectileLauncher : MonoBehaviour
 
     void LaunchProjectile()
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         Vector2 dir = new Vector2(player.transform.position.x - transform.position.x,
                                     player.transform.position.y - transform.position.y).normalized;
 

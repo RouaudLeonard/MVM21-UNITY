@@ -429,9 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c36a184055d1948841fa99193a7bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionConeDirection: {fileID: 6964784414193244952}
   turretPoint: {fileID: 4143102383688001455}
+  timeToTurretPointSec: 2
+  timeUntilBackToOriginalPos: 10
   enemyAI: {fileID: 2264619462084608345}
+  projectileLauncher: {fileID: 3262121429023403253}
 --- !u!114 &3262121429023403253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +449,7 @@ MonoBehaviour:
   projectileCooldownSec: 2
   projectilePrefab: {fileID: 8284577253857078103, guid: f86328a79908b1d4d9b8ad95d4faace4,
     type: 3}
+  enabled: 0
 --- !u!1001 &8797718036908733415
 PrefabInstance:
   m_ObjectHideFlags: 0
