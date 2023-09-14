@@ -6,9 +6,12 @@ public class EnemyEnergy : MonoBehaviour
 {
     public float maxEnergy = 100;
     public float energyDepleteSpeed = 10;
+    public float capturedHealthAdd = 25;
 
     public Bar energyBar;
     public EnemyAI enemyAI;
+
+    GameObject player;
 
     float currentEnergy = 0;
     public float CurrentEnergy
@@ -39,6 +42,7 @@ public class EnemyEnergy : MonoBehaviour
     void Start()
     {
         currentEnergy = maxEnergy;
+        player = transform.parent.gameObject.GetComponent<EnemyList>().player;
     }
 
     void Update()
@@ -50,6 +54,8 @@ public class EnemyEnergy : MonoBehaviour
 
     void EnergyDepleted()
     {
-        print("enemy died");
+        player.GetComponent<PlayerHealth>().CurrentHealth += capturedHealthAdd;
+        player.GetComponent<Hook>().Unhook();
+        Destroy(gameObject);
     }
 }

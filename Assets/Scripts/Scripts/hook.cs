@@ -38,6 +38,11 @@ public class Hook : MonoBehaviour
             return;
         }
         state = State.UNHOOKED;
+
+        if (hookedTo == null)
+        {
+            return;
+        }
         hookedTo.GetComponent<EnemyAI>().state = EnemyAI.State.IDLE;
         hookedTo = null;
     }
